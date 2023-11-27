@@ -64,7 +64,7 @@ function knn_search(X::AbstractMatrix{S},
                     ::Val{:pairwise}) where {S <: Real}
     num_points = size(X, 2)
     dist_mat = Array{S}(undef, num_points, num_points)
-    pairwise!(dist_mat, metric, X, dims=2)
+    pairwise!(metric, dist_mat, X, dims=2)
     # all_dists is symmetric distance matrix
     return _knn_from_dists(dist_mat, k)
 end
