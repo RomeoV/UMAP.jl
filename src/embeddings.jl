@@ -95,7 +95,7 @@ function optimize_embedding(graph::SparseMatrixCSC{T},
 
     alpha = initial_alpha
     for e in 1:n_epochs
-        @inbounds for i in 1:size(graph, 2)
+        @inbounds Threads.@threads for i in 1:size(graph, 2)
             for ind in nzrange(graph, i)
                 j = rowvals(graph)[ind]
                 p = nonzeros(graph)[ind]
